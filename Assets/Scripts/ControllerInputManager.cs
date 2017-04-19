@@ -15,6 +15,7 @@ public class ControllerInputManager : MonoBehaviour {
 	// Teleporter
 	public LineRenderer laser;
 	public GameObject teleportAimerObject;
+	public GameObject disabledAimerObject;
 	private Vector3 teleportLocation;
 	public GameObject player;
 	public LayerMask laserMask;
@@ -77,7 +78,6 @@ public class ControllerInputManager : MonoBehaviour {
 			if (leftDevice.GetPress(SteamVR_Controller.ButtonMask.Touchpad) && laser != null)
 			{
 				canTeleport = false;
-				//teleportAimerObject.GetComponent<Renderer>().material.color = Color.white;
 				laser.gameObject.SetActive(true);
 				teleportAimerObject.SetActive(true);
 
@@ -85,6 +85,8 @@ public class ControllerInputManager : MonoBehaviour {
 				RaycastHit hit;
 				if (Physics.Raycast(transform.position, transform.forward, out hit, teleporterMaxHorizontal, laserMask))
 				{
+					disabledAimerObject.SetActive(false);
+					teleportAimerObject.GetComponent<Renderer>().material.color = new Color(.42f, .82f, .56f, .39f);
 					canTeleport = true;
 					teleportLocation = hit.point;
 					laser.SetPosition(1, teleportLocation);
@@ -93,11 +95,17 @@ public class ControllerInputManager : MonoBehaviour {
 				}
 				else
 				{
+					disabledAimerObject.SetActive(true);
+					laser.gameObject.SetActive(false);
+					teleportAimerObject.SetActive(false);
 					canTeleport = false;
 					teleportLocation = new Vector3(transform.forward.x * teleporterMaxHorizontal + transform.position.x, transform.forward.y * teleporterMaxHorizontal + transform.position.y, transform.forward.z * teleporterMaxHorizontal + transform.position.z);
 					RaycastHit groundRay;
 					if (Physics.Raycast(teleportLocation, -Vector3.up, out groundRay, teleporterMaxVertical, laserMask))
 					{
+						disabledAimerObject.SetActive(false);
+						laser.gameObject.SetActive(true);
+						teleportAimerObject.SetActive(true);
 						canTeleport = true;
 						teleportLocation = new Vector3(transform.forward.x * teleporterMaxHorizontal + transform.position.x, groundRay.point.y, transform.forward.z * teleporterMaxHorizontal + transform.position.z);
 					}
@@ -110,6 +118,7 @@ public class ControllerInputManager : MonoBehaviour {
 		}
 		if (leftDevice.GetPressUp(SteamVR_Controller.ButtonMask.Touchpad) && laser != null)
 		{
+			disabledAimerObject.SetActive(false);
 			laser.gameObject.SetActive(false);
 			teleportAimerObject.SetActive(false);
 
