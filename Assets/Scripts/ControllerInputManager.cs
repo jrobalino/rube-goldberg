@@ -145,9 +145,6 @@ public class ControllerInputManager : MonoBehaviour {
 					isDashing = true;
 				}
 				else player.transform.position = new Vector3(teleportLocation.x + xOffset, teleportLocation.y + playerHeight, teleportLocation.z + zOffset);
-				Debug.Log("TeleportAimerObject Location: " + teleportAimerObject.transform.position);
-				Debug.Log("Teleport Location: " + teleportLocation);
-				Debug.Log("Player Location: " + player.transform.position);
 			}
 		}
 		/**** End Teleportation ****/
