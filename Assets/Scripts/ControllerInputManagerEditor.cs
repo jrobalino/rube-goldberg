@@ -10,6 +10,8 @@ public class ControllerInputEditor : Editor
 	{
 		var ControllerInputManager = target as ControllerInputManager;
 
+		//EditorGUILayout.PrefixLabel("Walk Speed");
+		ControllerInputManager.throwForce = EditorGUILayout.FloatField("Throw Force", ControllerInputManager.throwForce);
 		ControllerInputManager.leftController = EditorGUILayout.Toggle("Left Controller", ControllerInputManager.leftController);
 
 		using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(ControllerInputManager.leftController)))

@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class ControllerInputManager : MonoBehaviour {
 
-	public bool leftController;
+	public SteamVR_TrackedObject trackedObj;
+	private SteamVR_Controller.Device device;
 	
-	//public SteamVR_TrackedObject trackedObj;
 	public SteamVR_Controller.Device leftDevice;
 	//public SteamVR_Controller.Device rightDevice;
 	int leftIndex;
+	// int rightIndex;
+
+	// Throwing
+	public float throwForce = 1.5f;
 
 
 	// Teleporter
+
+	public bool leftController;
+
 	public LineRenderer laser;
 	public GameObject teleportAimerObject;
 	public GameObject disabledAimerObject;
@@ -41,16 +48,22 @@ public class ControllerInputManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//trackedObj = GetComponent<SteamVR_TrackedObject>();
-		//int rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+		trackedObj = GetComponent<SteamVR_TrackedObject>();
+		//rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
 		leftIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		device = SteamVR_Controller.Input((int)trackedObj.index);
 		leftDevice = SteamVR_Controller.Input(leftIndex);
 		//rightDevice = SteamVR_Controller.Input(rightIndex);
+
+		
+
+
+		/**** Teleportation ****/
 
 		if (allowWalking && leftDevice.GetPress(SteamVR_Controller.ButtonMask.Grip))
 		{
@@ -133,7 +146,45 @@ public class ControllerInputManager : MonoBehaviour {
 				
 			}
 		}
-
+		/**** End Teleportation ****/
 
 	}
+
+	/*** Grabbing and Throwing ****/
+	// To use this script, add colliders (say, sphere) to controller, enable Is Trigger, and decrease Radius to 0.2
+	// Then add rigidbody to controllers, setting Is Kinematic to true and Collison Detection to Continuous Dynamic.
+	// Objects that you pick up should have colliders with rigidbody with collision detection set to Continuous and should have the Throwable tag on them
+
+	private void OnTriggerStay(Collider col)
+	{
+		if (col.gameObject.CompareTag("Throwable"))
+		{
+			if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+			{
+				ThrowObject(col);
+			}
+			else if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+			{
+				GrabObject(col);
+			}
+		}
+	}
+
+	void GrabObject(Collider coli)
+	{
+		coli.transform.SetParent(gameObject.transform);
+		coli.GetComponent<Rigidbody>().isKinematic = true;
+		device.TriggerHapticPulse(2000);
+	}
+
+	void ThrowObject(Collider coli)
+	{
+		coli.transform.SetParent(null);
+		Rigidbody rigidBody = coli.GetComponent<Rigidbody>();
+		rigidBody.isKinematic = false;
+		rigidBody.velocity = device.velocity * throwForce;
+		rigidBody.angularVelocity = device.angularVelocity;
+	}
+
+	/**** End Grabbing and Throwing ****/
 }
