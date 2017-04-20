@@ -36,6 +36,10 @@ public class ControllerInputEditor : Editor
 				ControllerInputManager.teleporterMaxVertical = EditorGUILayout.FloatField(ControllerInputManager.teleporterMaxVertical);
 				EditorGUILayout.PrefixLabel("Player Height");
 				ControllerInputManager.playerHeight = EditorGUILayout.FloatField(ControllerInputManager.playerHeight);
+				EditorGUILayout.PrefixLabel("X Offset");
+				ControllerInputManager.xOffset = EditorGUILayout.FloatField(ControllerInputManager.xOffset);
+				EditorGUILayout.PrefixLabel("Z Offset");
+				ControllerInputManager.zOffset = EditorGUILayout.FloatField(ControllerInputManager.zOffset);
 				EditorGUILayout.PrefixLabel("Allow Dash");
 				ControllerInputManager.useDash = EditorGUILayout.Toggle(ControllerInputManager.useDash);
 				EditorGUILayout.PrefixLabel("Dash Speed");

@@ -30,6 +30,8 @@ public class ControllerInputManager : MonoBehaviour {
 	public float teleporterMaxHorizontal = 15.0f;
 	public float teleporterMaxVertical = 17.0f;
 	public float playerHeight = 2.0f;
+	public float xOffset = 0.25f;
+	public float zOffset = -.75f;
 	private bool canTeleport = false;
 
 	// Dash
@@ -142,8 +144,10 @@ public class ControllerInputManager : MonoBehaviour {
 					dashStartPosition = player.transform.position;
 					isDashing = true;
 				}
-				else player.transform.position = new Vector3(teleportLocation.x, teleportLocation.y + playerHeight, teleportLocation.z);
-				
+				else player.transform.position = new Vector3(teleportLocation.x + xOffset, teleportLocation.y + playerHeight, teleportLocation.z + zOffset);
+				Debug.Log("TeleportAimerObject Location: " + teleportAimerObject.transform.position);
+				Debug.Log("Teleport Location: " + teleportLocation);
+				Debug.Log("Player Location: " + player.transform.position);
 			}
 		}
 		/**** End Teleportation ****/
