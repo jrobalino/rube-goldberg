@@ -63,10 +63,12 @@ public class ControllerInputManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
-		rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
 		leftIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
+		rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+		Debug.Log(leftIndex);
+		Debug.Log(rightIndex);
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -163,7 +165,6 @@ public class ControllerInputManager : MonoBehaviour {
 		if (rightDevice.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad) && objectMenuManager != null)
 		{
 			menuActive = !menuActive;
-
 			if (menuActive)
 			{
 				ShowMenu();
@@ -212,6 +213,8 @@ public class ControllerInputManager : MonoBehaviour {
 		{
 			// Spawn object currently selected by menu. You could skip the SpawnObject function, but this function gives flexibility to support other types of controllers
 			SpawnObject();
+			menuActive = false;
+			HideMenu();
 		}
 
 
@@ -220,6 +223,7 @@ public class ControllerInputManager : MonoBehaviour {
 
 
 	/**** Continue Object Menu Swip ****/
+
 	void ShowMenu()
 	{
 		objectMenuManager.ShowMenu();
@@ -264,6 +268,18 @@ public class ControllerInputManager : MonoBehaviour {
 				GrabObject(col);
 			}
 		}
+
+		if (col.gameObject.CompareTag("Structure"))
+		{
+			if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
+			{
+				PlaceObject(col);
+			}
+			else if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
+			{
+				GrabObject(col);
+			}
+		}
 	}
 
 	void GrabObject(Collider coli)
@@ -280,6 +296,13 @@ public class ControllerInputManager : MonoBehaviour {
 		rigidBody.isKinematic = false;
 		rigidBody.velocity = device.velocity * throwForce;
 		rigidBody.angularVelocity = device.angularVelocity;
+	}
+
+	void PlaceObject(Collider coli)
+	{
+		coli.transform.SetParent(null);
+		//Rigidbody rigidBody = coli.GetComponent<Rigidbody>();
+		//rigidBody.isKinematic = false;
 	}
 
 	/**** End Grabbing and Throwing ****/

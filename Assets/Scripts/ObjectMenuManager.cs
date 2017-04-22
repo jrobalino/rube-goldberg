@@ -9,24 +9,23 @@ public class ObjectMenuManager : MonoBehaviour {
 	public SteamVR_LoadLevel loadLevel;
 
 	public int currentObject = 0;
-	public GameObject menu;
 
 	// Use this for initialization
 	void Start () {
-		foreach(Transform child in transform)
+		foreach (Transform child in transform)
 		{
 			objectList.Add(child.gameObject);
 		}
+		objectList[currentObject].SetActive(false);
 	}
 
 	public void ShowMenu()
 	{
-		menu.SetActive(true);
+		objectList[currentObject].SetActive(true);
 	}
 
 	public void HideMenu()
 	{
-		menu.SetActive(false);
 		objectList[currentObject].SetActive(false);
 	}
 
@@ -56,10 +55,8 @@ public class ObjectMenuManager : MonoBehaviour {
 
 	public void SpawnCurrentObject()
 	{
-		if (!menu.gameObject.activeSelf)
-		{
-			Instantiate(objectPrefabList[currentObject], objectList[currentObject].transform.position, objectList[currentObject].transform.rotation);
-		}
+		Transform [] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+		Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
 	}
 	// Update is called once per frame
 	void Update () {
