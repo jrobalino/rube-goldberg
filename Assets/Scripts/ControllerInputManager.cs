@@ -8,9 +8,9 @@ public class ControllerInputManager : MonoBehaviour {
 	private SteamVR_Controller.Device device;
 	
 	public SteamVR_Controller.Device leftDevice;
-	//public SteamVR_Controller.Device rightDevice;
+	public SteamVR_Controller.Device rightDevice;
 	int leftIndex;
-	// int rightIndex;
+	int rightIndex;
 
 	// Throwing
 	public float throwForce = 1.5f;
@@ -47,11 +47,23 @@ public class ControllerInputManager : MonoBehaviour {
 	public float moveSpeed = 4f;
 	private Vector3 movementDirection;
 
+	// Object Menu Swiping
+	public bool rightController;
+
+	bool menuActive = false;
+	float swipeSum;
+	float touchLast;
+	float touchCurrent;
+	float distance;
+	bool hasSwipedLeft;
+	bool hasSwipedRight;
+	public ObjectMenuManager objectMenuManager;
+
 
 	// Use this for initialization
 	void Start () {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
-		//rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
+		rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
 		leftIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
 	}
 	
@@ -60,9 +72,7 @@ public class ControllerInputManager : MonoBehaviour {
 
 		device = SteamVR_Controller.Input((int)trackedObj.index);
 		leftDevice = SteamVR_Controller.Input(leftIndex);
-		//rightDevice = SteamVR_Controller.Input(rightIndex);
-
-		
+		rightDevice = SteamVR_Controller.Input(rightIndex);
 
 
 		/**** Teleportation ****/
@@ -149,7 +159,92 @@ public class ControllerInputManager : MonoBehaviour {
 		}
 		/**** End Teleportation ****/
 
+		// Detect touchpad swipes
+		if (rightDevice.GetPressDown(SteamVR_Controller.ButtonMask.Touchpad) && objectMenuManager != null)
+		{
+			menuActive = !menuActive;
+
+			if (menuActive)
+			{
+				ShowMenu();
+			}
+			else HideMenu();
+		}
+
+		if (rightDevice.GetTouchDown(SteamVR_Controller.ButtonMask.Touchpad) && objectMenuManager != null && menuActive == true)
+		{
+			touchLast = rightDevice.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad).x;
+		}
+
+		if (rightDevice.GetTouch(SteamVR_Controller.ButtonMask.Touchpad) && objectMenuManager != null && menuActive == true)
+		{
+			touchCurrent = rightDevice.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Touchpad).x;
+			distance = touchCurrent - touchLast;
+			touchLast = touchCurrent;
+			swipeSum += distance;
+
+			if (!hasSwipedRight && swipeSum > 0.5f && objectMenuManager != null)
+			{
+				swipeSum = 0;
+				SwipeRight();
+				hasSwipedRight = true;
+				hasSwipedLeft = false;
+			}
+			if (!hasSwipedLeft && swipeSum < -0.5f && objectMenuManager != null)
+			{
+				swipeSum = 0;
+				SwipeLeft();
+				hasSwipedRight = false;
+				hasSwipedLeft = true;
+			}
+		}
+
+		if (rightDevice.GetTouchUp(SteamVR_Controller.ButtonMask.Touchpad) && objectMenuManager != null)
+		{
+			swipeSum = 0;
+			touchCurrent = 0;
+			touchLast = 0;
+			hasSwipedLeft = false;
+			hasSwipedRight = false;
+		}
+
+		if (rightDevice.GetPressDown(SteamVR_Controller.ButtonMask.Trigger) && objectMenuManager != null && menuActive == true)
+		{
+			// Spawn object currently selected by menu. You could skip the SpawnObject function, but this function gives flexibility to support other types of controllers
+			SpawnObject();
+		}
+
+
+
+	} /**** End Update() ****/
+
+
+	/**** Continue Object Menu Swip ****/
+	void ShowMenu()
+	{
+		objectMenuManager.ShowMenu();
 	}
+
+	void HideMenu()
+	{
+		objectMenuManager.HideMenu();
+	}
+
+	void SpawnObject()
+	{
+		objectMenuManager.SpawnCurrentObject();
+	}
+
+	void SwipeLeft()
+	{
+		objectMenuManager.MenuLeft();
+	}
+
+	void SwipeRight()
+	{
+		objectMenuManager.MenuRight();
+	}
+	/**** End Object Menu Swipe ****/
 
 	/*** Grabbing and Throwing ****/
 	// To use this script, add colliders (say, sphere) to controller, enable Is Trigger, and decrease Radius to 0.2

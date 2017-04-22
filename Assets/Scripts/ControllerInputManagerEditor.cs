@@ -53,6 +53,18 @@ public class ControllerInputEditor : Editor
 				EditorGUI.indentLevel--;
 			}
 		}
+
+		ControllerInputManager.rightController = EditorGUILayout.Toggle("Right Controller", ControllerInputManager.rightController);
+
+		using (var group = new EditorGUILayout.FadeGroupScope(Convert.ToSingle(ControllerInputManager.rightController)))
+		{
+			if (group.visible == true)
+			{
+				EditorGUI.indentLevel++;
+				EditorGUILayout.PrefixLabel("Object Menu Manager");
+				ControllerInputManager.objectMenuManager = (ObjectMenuManager)EditorGUILayout.ObjectField(ControllerInputManager.objectMenuManager, typeof(ObjectMenuManager), true);
+			}
+		}
 	}
 }
 
