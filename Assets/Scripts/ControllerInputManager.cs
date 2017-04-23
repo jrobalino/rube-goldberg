@@ -65,8 +65,6 @@ public class ControllerInputManager : MonoBehaviour {
 		trackedObj = GetComponent<SteamVR_TrackedObject>();
 		leftIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Leftmost);
 		rightIndex = SteamVR_Controller.GetDeviceIndex(SteamVR_Controller.DeviceRelation.Rightmost);
-		Debug.Log(leftIndex);
-		Debug.Log(rightIndex);
 	}
 
 	// Update is called once per frame
@@ -301,8 +299,6 @@ public class ControllerInputManager : MonoBehaviour {
 	void PlaceObject(Collider coli)
 	{
 		coli.transform.SetParent(null);
-		//Rigidbody rigidBody = coli.GetComponent<Rigidbody>();
-		//rigidBody.isKinematic = false;
 	}
 
 	/**** End Grabbing and Throwing ****/

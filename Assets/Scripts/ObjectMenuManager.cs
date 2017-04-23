@@ -16,7 +16,6 @@ public class ObjectMenuManager : MonoBehaviour {
 		{
 			objectList.Add(child.gameObject);
 		}
-		objectList[currentObject].SetActive(false);
 	}
 
 	public void ShowMenu()
