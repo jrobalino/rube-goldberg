@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Trampoline : MonoBehaviour {
 
-	public Transform ball;
 	public float force = 7f;
 	
 	// Use this for initialization
