@@ -62,6 +62,8 @@ public class ControllerInputEditor : Editor
 				EditorGUI.indentLevel++;
 				EditorGUILayout.PrefixLabel("Object Menu Manager");
 				ControllerInputManager.objectMenuManager = (ObjectMenuManager)EditorGUILayout.ObjectField(ControllerInputManager.objectMenuManager, typeof(ObjectMenuManager), true);
+				EditorGUILayout.PrefixLabel("Fan Manager");
+				ControllerInputManager.fan = (Fan)EditorGUILayout.ObjectField(ControllerInputManager.fan, typeof(Fan), true);
 			}
 		}
 	}

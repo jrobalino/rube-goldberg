@@ -25,7 +25,7 @@ public class BallReset : MonoBehaviour {
 		}
 	}
 
-	private void ResetBall()
+	public void ResetBall()
 	{
 		Rigidbody rigidBody = gameObject.GetComponent<Rigidbody>();
 		rigidBody.velocity = new Vector3(0, 0, 0);

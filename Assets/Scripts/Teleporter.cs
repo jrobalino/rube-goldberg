@@ -26,7 +26,7 @@ public class Teleporter : MonoBehaviour {
 
 			if (target != transform)
 			{
-				newPosition = target.position + target.forward.normalized * 0.2f;
+				newPosition = target.position + target.forward.normalized * 0.3f;
 				
 				ball.transform.position = newPosition;
 			}

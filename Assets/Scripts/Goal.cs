@@ -5,6 +5,7 @@ using UnityEngine;
 public class Goal : MonoBehaviour {
 
 	public GameObject [] collectibles;
+	public BallReset ballReset;
 	
 	// Use this for initialization
 	void Start () {
@@ -24,7 +25,7 @@ public class Goal : MonoBehaviour {
 			{
 				if (collectible.activeSelf)
 				{
-					break;
+					ballReset.ResetBall();
 				}
 				else collision.gameObject.SetActive(false);
 			}

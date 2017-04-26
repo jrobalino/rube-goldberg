@@ -59,6 +59,9 @@ public class ControllerInputManager : MonoBehaviour {
 	bool hasSwipedRight;
 	public ObjectMenuManager objectMenuManager;
 
+	// Trigger fan
+	public Fan fan;
+
 
 	// Use this for initialization
 	void Start () {
@@ -215,6 +218,16 @@ public class ControllerInputManager : MonoBehaviour {
 			HideMenu();
 		}
 
+		/**** Trigger Fan ****/
+		if (rightDevice.GetPressDown(SteamVR_Controller.ButtonMask.Grip) && fan != null)
+		{
+			fan.startFan();
+		}
+
+		if (rightDevice.GetPressUp(SteamVR_Controller.ButtonMask.Grip) && fan != null)
+		{
+			fan.stopFan();
+		}
 
 
 	} /**** End Update() ****/
@@ -255,7 +268,7 @@ public class ControllerInputManager : MonoBehaviour {
 
 	private void OnTriggerStay(Collider col)
 	{
-		if (col.gameObject.CompareTag("Throwable"))
+		if (col.gameObject.CompareTag("Throwable") || col.gameObject.CompareTag("Ball"))
 		{
 			if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
 			{
