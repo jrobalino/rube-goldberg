@@ -62,6 +62,9 @@ public class ControllerInputManager : MonoBehaviour {
 	// Trigger fan
 	public Fan fan;
 
+	// Keep track of ball on platform
+	public BallReset ballReset;
+
 
 	// Use this for initialization
 	void Start () {
@@ -273,10 +276,18 @@ public class ControllerInputManager : MonoBehaviour {
 			if (device.GetPressUp(SteamVR_Controller.ButtonMask.Trigger))
 			{
 				ThrowObject(col);
+				if (col.gameObject.CompareTag("Ball"))
+				{
+					DropBall();
+				}
 			}
 			else if (device.GetPressDown(SteamVR_Controller.ButtonMask.Trigger))
 			{
 				GrabObject(col);
+				if (col.gameObject.CompareTag("Ball"))
+				{
+					GrabBall();
+				}
 			}
 		}
 
@@ -291,6 +302,16 @@ public class ControllerInputManager : MonoBehaviour {
 				GrabObject(col);
 			}
 		}
+	}
+
+	void GrabBall()
+	{
+		ballReset.GrabBall();
+	}
+
+	void DropBall()
+	{
+		ballReset.DropBall();
 	}
 
 	void GrabObject(Collider coli)

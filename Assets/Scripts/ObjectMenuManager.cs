@@ -121,7 +121,7 @@ public class ObjectMenuManager : MonoBehaviour {
 		text.text = "You have run out of this item.";
 
 		Renderer renderer = objectList[currentObject].GetComponentInChildren<Renderer>();
-		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0.5f);
+		renderer.material.color = new Color(renderer.material.color.r, renderer.material.color.g, renderer.material.color.b, 0.25f);
 
 	}
 
