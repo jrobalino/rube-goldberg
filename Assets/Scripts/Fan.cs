@@ -29,6 +29,7 @@ public class Fan : MonoBehaviour {
 		if (spinFan)
 		{
 			gameObject.transform.Rotate(0, 0, fanSpeed * Time.deltaTime);
+			ballRigidbody.velocity = new Vector3(0, 0, 0);
 			ballRigidbody.useGravity = false;
 			ball.transform.position = Vector3.Lerp(startPos, goal.transform.position, Time.deltaTime * lerpSpeed);
 		}
