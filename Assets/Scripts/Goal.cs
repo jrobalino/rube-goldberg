@@ -22,19 +22,28 @@ public class Goal : MonoBehaviour {
 	{
 		if (collision.gameObject.name == "Ball")
 		{
+			int size = collectibles.Length;
+			int count = 0;
 			foreach (GameObject collectible in collectibles)
 			{
 				if (collectible.activeSelf)
 				{
 					ballReset.ResetBall();
+					count++;
+					break;
 				}
 				else
 				{
-					collision.gameObject.SetActive(false);
-					loadLevel.Trigger();
+					count++;
+					if (count == size)
+					{
+						collision.gameObject.SetActive(false);
+						loadLevel.Trigger();
+					}
 				}
 			}
 			
+
 		}
 	}
 }

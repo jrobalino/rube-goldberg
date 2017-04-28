@@ -17,10 +17,10 @@ public class BallReset : MonoBehaviour {
 		collectibles = GameObject.FindGameObjectsWithTag("Collectibles");
 		platformRenderer = platform.GetComponent<Renderer>();
 		ballRenderer = gameObject.GetComponentInChildren<Renderer>();
-		xMax = platformRenderer.bounds.center.x + platformRenderer.bounds.extents.x;
-		xMin = platformRenderer.bounds.center.x - platformRenderer.bounds.extents.x;
-		zMax = platformRenderer.bounds.center.z + platformRenderer.bounds.extents.z;
-		zMin = platformRenderer.bounds.center.z - platformRenderer.bounds.extents.z;
+		xMax = platformRenderer.bounds.center.x + platformRenderer.bounds.extents.x + .75f;
+		xMin = platformRenderer.bounds.center.x - platformRenderer.bounds.extents.x -.75f;
+		zMax = platformRenderer.bounds.center.z + platformRenderer.bounds.extents.z +.75f;
+		zMin = platformRenderer.bounds.center.z - platformRenderer.bounds.extents.z - .75f;
 	}
 
 	public void Update()
