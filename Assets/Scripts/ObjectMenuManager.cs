@@ -62,9 +62,76 @@ public class ObjectMenuManager : MonoBehaviour {
 
 	public void SpawnCurrentObject()
 	{
-		Transform [] children = objectList[currentObject].GetComponentsInChildren<Transform>();
-		Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
-		DecreaseInventory(currentObject);
+		switch (currentObject)
+		{
+			case 0:
+				
+				if (enabled1 == false)
+				{
+					break;
+				}
+				else
+				{
+					Transform[] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+					Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
+					DecreaseInventory(currentObject);
+				}
+				break;
+			case 1:
+
+				if (enabled2 == false)
+				{
+					break;
+				}
+				else
+				{
+					Transform[] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+					Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
+					DecreaseInventory(currentObject);
+				}
+				break;
+			case 2:
+
+				if (enabled3 == false)
+				{
+					break;
+				}
+				else
+				{
+					Transform[] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+					Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
+					DecreaseInventory(currentObject);
+				}
+				break;
+			case 3:
+
+				if (enabled4 == false)
+				{
+					break;
+				}
+				else
+				{
+					Transform[] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+					Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
+					DecreaseInventory(currentObject);
+				}
+				break;
+			case 4:
+
+				if (enabled5 == false)
+				{
+					break;
+				}
+				else
+				{
+					Transform[] children = objectList[currentObject].GetComponentsInChildren<Transform>();
+					Instantiate(objectPrefabList[currentObject], children[1].position, children[1].rotation);
+					DecreaseInventory(currentObject);
+				}
+				break;
+
+		}
+		
 	}
 
 	public void DecreaseInventory(int currentObject)
