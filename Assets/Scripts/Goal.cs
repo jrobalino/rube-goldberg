@@ -5,7 +5,7 @@ using UnityEngine;
 public class Goal : MonoBehaviour {
 
 	public SteamVR_LoadLevel loadLevel;
-	public GameObject [] collectibles;
+	GameObject [] collectibles;
 	public BallReset ballReset;
 	
 	// Use this for initialization

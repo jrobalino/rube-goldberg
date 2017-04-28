@@ -69,5 +69,10 @@ public class BallReset : MonoBehaviour {
 	public void DropBall()
 	{
 		ballInHand = false;
+		if (gameObject.transform.position.x > xMax || gameObject.transform.position.x < xMin || gameObject.transform.position.z > zMax || gameObject.transform.position.z < zMin)
+		{
+			ballRenderer.material.color = new Color(ballRenderer.material.color.r, ballRenderer.material.color.g, ballRenderer.material.color.b, 0.25f);
+			ResetBall();
+		}
 	}
 }
