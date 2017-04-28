@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Goal : MonoBehaviour {
 
+	public SteamVR_LoadLevel loadLevel;
 	public GameObject [] collectibles;
 	public BallReset ballReset;
 	
@@ -27,7 +28,11 @@ public class Goal : MonoBehaviour {
 				{
 					ballReset.ResetBall();
 				}
-				else collision.gameObject.SetActive(false);
+				else
+				{
+					collision.gameObject.SetActive(false);
+					loadLevel.Trigger();
+				}
 			}
 			
 		}
