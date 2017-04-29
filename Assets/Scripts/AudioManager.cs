@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-	public AudioSource introClip;
+	//public AudioSource introClip;
 
 	GameObject[] collectibles;
 
@@ -17,8 +17,7 @@ public class AudioManager : MonoBehaviour {
 		Debug.Log(collectibles[0]);
 		Debug.Log(collectibles[1]);
 		Debug.Log(collectibles[2]);
-		//introClip.Play();
-		Debug.Log("This is the intro audio.");
+		
 	}
 	
 	// Update is called once per frame
