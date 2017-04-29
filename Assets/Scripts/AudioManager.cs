@@ -4,20 +4,17 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-	//public AudioSource introClip;
+	public AudioSource introClip, conveyorClip, teleporterClip, fanClip;
 
 	GameObject[] collectibles;
+	Color starColor;
 
 	bool conveyorPlayed, teleporterPlayed, fanPlayed;
 	
 	// Use this for initialization
 	void Start () {
 		collectibles = GameObject.FindGameObjectsWithTag("Collectibles");
-		Debug.Log(collectibles);
-		Debug.Log(collectibles[0]);
-		Debug.Log(collectibles[1]);
-		Debug.Log(collectibles[2]);
-		
+		starColor = collectibles[0].GetComponent<Renderer>().material.color;
 	}
 	
 	// Update is called once per frame
@@ -25,21 +22,40 @@ public class AudioManager : MonoBehaviour {
 		
 		if(!collectibles[2].activeSelf && !conveyorPlayed)
 		{
-			Debug.Log("Play conveyor audio.");
 			conveyorPlayed = true;
+			conveyorClip.Play();
 		}
 
 		if (!collectibles[0].activeSelf && !teleporterPlayed && conveyorPlayed)
 		{
-			Debug.Log("Play teleporter audio.");
 			teleporterPlayed = true;
+			teleporterClip.Play();
 		}
 
 		if (!collectibles[1].activeSelf && !fanPlayed && teleporterPlayed)
 		{
-			Debug.Log("Play fan audio.");
 			fanPlayed = true;
+			fanClip.Play();
 		}
+
+		if (introClip.isPlaying || conveyorClip.isPlaying || teleporterClip.isPlaying || fanClip.isPlaying)
+		{
+			foreach (GameObject collectible in collectibles)
+			{
+				collectible.GetComponent<Collider>().enabled = false;
+				collectible.GetComponent<Renderer>().material.color = new Color(.88f, .25f, .25f, .25f);
+			}
+		}
+		else
+		{
+			foreach (GameObject collectible in collectibles)
+			{
+				collectible.GetComponent<Collider>().enabled = true;
+				collectible.GetComponent<Renderer>().material.color = starColor;
+			}
+		}
+		
+
 
 
 	}

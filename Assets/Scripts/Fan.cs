@@ -8,6 +8,7 @@ public class Fan : MonoBehaviour {
 	static bool spinFan;
 	float lerpSpeed = 1f;
 	Rigidbody ballRigidbody;
+	AudioSource fanSound;
 
 	GameObject ball;
 	GameObject goal;
@@ -20,6 +21,7 @@ public class Fan : MonoBehaviour {
 		ball = GameObject.FindGameObjectWithTag("Ball");
 		goal = GameObject.FindGameObjectWithTag("Goal");
 		ballRigidbody = ball.GetComponent<Rigidbody>();
+		fanSound = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -33,7 +35,11 @@ public class Fan : MonoBehaviour {
 			ballRigidbody.useGravity = false;
 			ball.transform.position = Vector3.Lerp(startPos, goal.transform.position, Time.deltaTime * lerpSpeed);
 		}
-		else ballRigidbody.useGravity = true;
+		else
+		{
+			fanSound.Play();
+			ballRigidbody.useGravity = true;
+		}
 	}
 
 	public void startFan()

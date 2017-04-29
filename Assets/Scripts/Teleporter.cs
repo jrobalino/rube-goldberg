@@ -7,10 +7,11 @@ public class Teleporter : MonoBehaviour {
 	GameObject ball;
 	Transform target;
 	Vector3 newPosition;
+	AudioSource teleporterSound;
 	
 	// Use this for initialization
 	void Start () {
-		
+		teleporterSound = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -22,10 +23,13 @@ public class Teleporter : MonoBehaviour {
 	{
 		if (collision.gameObject.name == "Ball")
 		{
+
+			
 			ball = collision.gameObject;
 
 			if (target != transform)
 			{
+				teleporterSound.Play();
 				newPosition = target.position + target.forward.normalized * 0.3f;
 				
 				ball.transform.position = newPosition;

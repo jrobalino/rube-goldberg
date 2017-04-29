@@ -9,6 +9,7 @@ public class Conveyor : MonoBehaviour {
 	Transform startPos;
 	Transform[] positions;
 	Transform endPos;
+	AudioSource conveyorSound;
 
 	bool moveBall = false;
 	
@@ -16,6 +17,7 @@ public class Conveyor : MonoBehaviour {
 	void Start () {
 		positions = gameObject.GetComponentsInChildren<Transform>();
 		endPos = positions[1];
+		conveyorSound = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -32,6 +34,7 @@ public class Conveyor : MonoBehaviour {
 	{
 		if (collision.gameObject.name == "Ball")
 		{
+			conveyorSound.Play();
 			moveBall = true;
 			ball = collision.gameObject;
 			startPos = ball.transform;

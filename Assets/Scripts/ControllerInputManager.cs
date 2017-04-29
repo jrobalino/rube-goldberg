@@ -61,6 +61,7 @@ public class ControllerInputManager : MonoBehaviour {
 
 	// Trigger fan
 	public Fan fan;
+	public AudioSource fanSound;
 
 	// Keep track of ball on platform
 	public BallReset ballReset;

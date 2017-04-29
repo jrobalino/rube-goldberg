@@ -7,10 +7,12 @@ public class Goal : MonoBehaviour {
 	public SteamVR_LoadLevel loadLevel;
 	GameObject [] collectibles;
 	public BallReset ballReset;
+	AudioSource goalSound;
 	
 	// Use this for initialization
 	void Start () {
 		collectibles = GameObject.FindGameObjectsWithTag("Collectibles");
+		goalSound = gameObject.GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -37,6 +39,7 @@ public class Goal : MonoBehaviour {
 					count++;
 					if (count == size)
 					{
+						goalSound.Play();
 						collision.gameObject.SetActive(false);
 						loadLevel.Trigger();
 					}

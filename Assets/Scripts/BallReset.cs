@@ -11,6 +11,7 @@ public class BallReset : MonoBehaviour {
 	float xMax, xMin, zMax, zMin;
 	static bool ballInHand;
 	AudioSource collectSound;
+	public BallSounds ballSounds;
 
 	public void Start()
 	{
@@ -39,6 +40,7 @@ public class BallReset : MonoBehaviour {
 	{
 		if (collision.collider.tag == "Ground")
 		{
+			ballSounds.playRandomSound();
 			foreach (GameObject collectible in collectibles)
 			{
 				collectible.SetActive(true);
