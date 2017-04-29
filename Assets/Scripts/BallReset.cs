@@ -10,6 +10,7 @@ public class BallReset : MonoBehaviour {
 	Renderer platformRenderer, ballRenderer;
 	float xMax, xMin, zMax, zMin;
 	static bool ballInHand;
+	AudioSource collectSound;
 
 	public void Start()
 	{
@@ -21,6 +22,7 @@ public class BallReset : MonoBehaviour {
 		xMin = platformRenderer.bounds.center.x - platformRenderer.bounds.extents.x -.75f;
 		zMax = platformRenderer.bounds.center.z + platformRenderer.bounds.extents.z +.75f;
 		zMin = platformRenderer.bounds.center.z - platformRenderer.bounds.extents.z - .75f;
+		collectSound = gameObject.GetComponent<AudioSource>();
 	}
 
 	public void Update()
@@ -42,6 +44,11 @@ public class BallReset : MonoBehaviour {
 				collectible.SetActive(true);
 			}
 			Invoke("ResetBall", 1.5f);
+		}
+
+		if (collision.collider.tag == "Collectibles")
+		{
+			collectSound.Play();
 		}
 	}
 
