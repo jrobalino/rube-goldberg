@@ -303,6 +303,12 @@ public class ControllerInputManager : MonoBehaviour {
 				GrabObject(col);
 			}
 		}
+
+		if (col.gameObject.CompareTag("Ball Reset"))
+		{
+			ballReset.ResetBall();
+			col.gameObject.GetComponent<AudioSource>().Play();
+		}
 	}
 
 	void GrabBall()
