@@ -18,3 +18,27 @@ You are zipping right along! I'd suggest giving you a promotion if such a thing 
 
 [Level4_Intro]
 You surprise me yet again. And just in time, too. The managers have agreed that you will be ready to move forward to the next phase after you complete this final factory floor shift. So don't waste any time! Exciting opportunities await you in the next phase. Really. You can trust me. Oh, and PS. You won't be able to use the fan this time. We are trying to save both the planet and our energy bill, so please make do without the fan.
+
+[Game_Intro]
+
+Lo tienes? Bien. Empieza el proceso.
+
+Comenzando la fase final. Todo parece normal. Solo que parecen haber señales pequeñas de estar consciente.
+
+No te preocupes por eso. Asi a veces pasa. Ya pronto estara fuera del cuerpo y vera sus controles nuevos.
+
+Vaya. Menos mal que falte poco. Ya me ponia mal de tanto hambre. A donde se manda despues del proceso?
+
+Creo que a una fábrica de cajas vacías.
+
+Cajas vacías?
+
+Asi es.
+
+Que cosa mas rara. Bueno, al final no importa.
+
+No. No importa nada. Y mira, se completa el proceso. Todo resulta bien. A mi tambien me a dado un poco de hambre. Hay que limpiar aqui para salir rápido y comernos unas tapas.
+
+Me suena bien.
+
+[Game_Outro]
