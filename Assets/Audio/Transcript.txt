@@ -42,3 +42,8 @@ No. No importa nada. Y mira, se completa el proceso. Todo resulta bien. A mi tam
 Me suena bien.
 
 [Game_Outro]
+Forgot to record this.
+
+[GameFinal_Intro]
+Welcome back. You've come full circle. Yes, you are a ball now. No, I'm not kidding around. All that is left for you to do now is wait for the next bodyless employee to show up for their first work shift. I am curious how well they'll do? Let's hope they don't send you to a painful death too soon, like you did with all those balls you killed. You were fun to have around, and I shall miss you, as much as one can miss an abstract concept of a person. I don't think the other employee is due anytime soon though, so this is Kate signing off for now. Oh, but wait! I almost forgot. While you are stuck in your cage, you are welcome to partake in our courtesy simulation, which we provide to all our balls. Hopefully, this simulation will help ease your sense of impending death. Simply pretend you have a body again and that you are wearing a helmet, and then use your pretend arms take off your pretend helmet. You'll be rewarded with a convincing simulation of being a human person again. I trust this alternate life will be better than the one you have now. Alrighty then. Cheerio!
+
