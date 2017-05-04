@@ -4,6 +4,8 @@ This is Javier Robalino's Rube Goldberg game.
 
 ## Target Platform
 
+HTC Vive
+
 ## Project Start Date
 
 April 15, 2017
