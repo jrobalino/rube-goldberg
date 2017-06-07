@@ -2,6 +2,10 @@
 
 This is Javier Robalino's Rube Goldberg game.
 
+## Gameplay Video
+
+[Click to view on YouTube](https://youtu.be/abQ79KXhK0Y)
+
 ## Target Platform
 
 HTC Vive
